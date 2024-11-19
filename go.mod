@@ -1,0 +1,1 @@
+module "github.com/1URose/ToDoList/internal/app"
