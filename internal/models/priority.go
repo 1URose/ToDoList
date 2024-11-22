@@ -3,19 +3,19 @@ package models
 type Priority int
 
 const (
-	High Priority = iota
+	Low Priority = iota
 	Middle
-	Low
+	High
 )
 
 func (p Priority) toString() string {
 	switch p {
-	case High:
-		return "High"
-	case Middle:
-		return "Middle"
 	case Low:
 		return "Low"
+	case Middle:
+		return "Middle"
+	case High:
+		return "High"
 	default:
 		return "Unknown"
 	}

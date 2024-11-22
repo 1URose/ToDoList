@@ -10,7 +10,7 @@ const (
 	Done
 )
 
-func (s StatusOfTask) toString() string {
+func (s StatusOfTask) ToString() string {
 	switch s {
 	case NeedToDo:
 		return "Need to do"
