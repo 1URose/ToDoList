@@ -24,7 +24,7 @@ func (u *User) GetUserPassword(user User) string {
 	return user.password
 }
 
-func (u *User) UpdateUser(newName, newPassword, newEmail string) error {
+func (u *User) UpdateUser(newName, newPassword, newEmail string) {
 	if newName != "" {
 		u.Username = newName
 	}
@@ -34,7 +34,6 @@ func (u *User) UpdateUser(newName, newPassword, newEmail string) error {
 	if newEmail != "" {
 		u.Email = newEmail
 	}
-	return nil
 }
 
 func (u *User) ValidatePassword(inputPassword string) bool {

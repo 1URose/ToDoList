@@ -2,28 +2,40 @@ package main
 
 import (
 	"ToDoList/internal/models"
+	"ToDoList/internal/services"
 	"fmt"
 )
 
 func main() {
-	// Создаем объект User
-	userr := models.User{}
-	taskk := models.Task{}
-	//Создаем объект Task
-	user := userr.NewUser("User 1", "Password 1", "Email 1")
+	us := services.UserService{}
+	u := models.User{Username: "1", Email: "1"}
 
-	newTask := taskk.NewTask(
-		"Task 1",
-		"Description 1",
-		models.NeedToDo,
-		models.High,
-		user,
-	)
+	for i := 0; i < 5; i++ {
+		name := fmt.Sprint("Name", i)
+		email := fmt.Sprint("Email", i)
+		us.AddUser(name, "password", email)
 
-	fmt.Printf("%#+v\n", *newTask)
-	fmt.Printf("%#+v\n", (*newTask).Executor)
-	user.Username = "User 2"
-	fmt.Println()
-	fmt.Printf("%#+v\n", *newTask)
-	fmt.Printf("%#+v\n", (*newTask).Executor)
+	}
+	us.Users[3] = u
+	fmt.Printf("%#+v", us)
+	fmt.Println("\n")
+	for _, user := range us.Users {
+		fmt.Printf("%#+v\n", user)
+	}
+
+	_, user, err := us.FindUserById(us.Users[0].Id)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("%#+v\n", user)
+
+	err = us.UpdateUserById(user.Id, "", "", "newEmail")
+
+	fmt.Printf("%#+v\n", us.Users[0])
+	err = us.DeleteUserById(us.Users[3].Id)
+	fmt.Println("\n")
+	for _, user := range us.Users {
+		fmt.Printf("%#+v\n", user)
+	}
 }
